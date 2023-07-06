@@ -77,7 +77,7 @@ CLASS ZCL_RAF_INBOUND_FUNC IMPLEMENTATION.
       " 未配置 & 处理函数，请联系相关人员!
       me->set_message( server = server
         msg    = VALUE #( msgno = 005 msgv1 = me->raf_maintain-apino )
-        reason = `setting error`
+        reason = `setting error ztraf_iconf`
       ).
       RETURN.
     ENDIF.
@@ -96,7 +96,7 @@ CLASS ZCL_RAF_INBOUND_FUNC IMPLEMENTATION.
       " ERP端函数名维护有误，请联系ERP管理员检查配置表ZTAPI_IN_CONF。
       me->set_message( server = server
         msg    = VALUE #( msgno = 006 msgv1 = me->raf_maintain-apino )
-        reason = `setting error`
+        reason = `setting error func`
       ).
       RETURN.
     ENDIF.

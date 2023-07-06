@@ -246,8 +246,8 @@ FORM frm_set_tcodemap .
 *    ( ucomm = 'R02' tcode = 'SE38' object = 'ZAPIR_002'        text = TEXT-202 )   " 接口请求状态统计
 *    ( ucomm = 'R03' tcode = 'SE38' object = 'ZAPIR_003'        text = TEXT-203 )   " PO 端消息概览
     " 工具
-*    ( ucomm = 'P01' tcode = 'SE38' object = 'ZAPIMG_GEN_XML'   text = TEXT-301 )   " 基于函数生成 PO XSD 文件
-*    ( ucomm = 'P02' tcode = 'SE38' object = 'ZAPIMG_GEN_JSON'  text = TEXT-302 )   " 基于函数测试数据生成 JSON
+    ( ucomm = 'P01' tcode = 'SE38' object = 'ZRAF_GEN_JSON'    text = TEXT-301 )    " 基于函数测试数据生成 JSON
+*    ( ucomm = 'P02' tcode = 'SE38' object = 'ZAPIMG_GEN_JSON'  text = TEXT-302 )   "
 *    ( ucomm = 'P03' tcode = 'SE38' object = 'ZAPIMG_REST_TEST' text = TEXT-303 )   " REST 接口测试
     " 日志功能
     ( ucomm = 'L01' tcode = 'SE38' object = 'ZRAF_LOG'         text = TEXT-401 )   " 接口日志查询

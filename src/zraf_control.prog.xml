@@ -36,6 +36,12 @@
     </item>
     <item>
      <ID>I</ID>
+     <KEY>301</KEY>
+     <ENTRY>基于函数测试数据生成 JSON</ENTRY>
+     <LENGTH>25</LENGTH>
+    </item>
+    <item>
+     <ID>I</ID>
      <KEY>401</KEY>
      <ENTRY>接口日志查询</ENTRY>
      <LENGTH>16</LENGTH>
@@ -51,6 +57,12 @@
      <KEY>T02</KEY>
      <ENTRY>报表</ENTRY>
      <LENGTH>14</LENGTH>
+    </item>
+    <item>
+     <ID>I</ID>
+     <KEY>T03</KEY>
+     <ENTRY>工具</ENTRY>
+     <LENGTH>12</LENGTH>
     </item>
     <item>
      <ID>I</ID>
