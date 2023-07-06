@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DOMA" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD01V>
+    <DOMNAME>ZDRAF_SYSID</DOMNAME>
+    <DDLANGUAGE>1</DDLANGUAGE>
+    <DATATYPE>CHAR</DATATYPE>
+    <LENG>000008</LENG>
+    <OUTPUTLEN>000008</OUTPUTLEN>
+    <VALEXI>X</VALEXI>
+    <DDTEXT>环境</DDTEXT>
+   </DD01V>
+   <DD07V_TAB>
+    <DD07V>
+     <VALPOS>0001</VALPOS>
+     <DDLANGUAGE>1</DDLANGUAGE>
+     <DOMVALUE_L>DEV</DOMVALUE_L>
+     <DDTEXT>DEV</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0002</VALPOS>
+     <DDLANGUAGE>1</DDLANGUAGE>
+     <DOMVALUE_L>QAS</DOMVALUE_L>
+     <DDTEXT>QAS</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <VALPOS>0003</VALPOS>
+     <DDLANGUAGE>1</DDLANGUAGE>
+     <DOMVALUE_L>PRD</DOMVALUE_L>
+     <DDTEXT>PRD</DDTEXT>
+    </DD07V>
+   </DD07V_TAB>
+  </asx:values>
+ </asx:abap>
+</abapGit>

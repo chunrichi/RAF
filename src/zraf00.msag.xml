@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_MSAG" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <T100A>
+    <ARBGB>ZRAF00</ARBGB>
+    <MASTERLANG>1</MASTERLANG>
+    <STEXT>RAF 相关消息</STEXT>
+   </T100A>
+   <T100>
+    <T100>
+     <SPRSL>1</SPRSL>
+     <ARBGB>ZRAF00</ARBGB>
+     <MSGNR>000</MSGNR>
+     <TEXT>&amp;</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>1</SPRSL>
+     <ARBGB>ZRAF00</ARBGB>
+     <MSGNR>001</MSGNR>
+     <TEXT>未找到 &amp;!</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>1</SPRSL>
+     <ARBGB>ZRAF00</ARBGB>
+     <MSGNR>002</MSGNR>
+     <TEXT>apino 是必须的!</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>1</SPRSL>
+     <ARBGB>ZRAF00</ARBGB>
+     <MSGNR>003</MSGNR>
+     <TEXT>&amp; 无效的方法!</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>1</SPRSL>
+     <ARBGB>ZRAF00</ARBGB>
+     <MSGNR>004</MSGNR>
+     <TEXT>&amp; 是不支持的内容类型! &apos;application/json&apos; 是必须的!</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>1</SPRSL>
+     <ARBGB>ZRAF00</ARBGB>
+     <MSGNR>005</MSGNR>
+     <TEXT>&amp; 接口服务尚未开启，请联系ERP管理员检查配置表ZTRAF_ICONF。</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>1</SPRSL>
+     <ARBGB>ZRAF00</ARBGB>
+     <MSGNR>006</MSGNR>
+     <TEXT>ERP端函数名维护有误，请联系ERP管理员检查配置表ZTRAF_ICONF。</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>1</SPRSL>
+     <ARBGB>ZRAF00</ARBGB>
+     <MSGNR>007</MSGNR>
+     <TEXT>ERP端API调用异常，请联系ERP管理员。</TEXT>
+    </T100>
+   </T100>
+  </asx:values>
+ </asx:abap>
+</abapGit>
