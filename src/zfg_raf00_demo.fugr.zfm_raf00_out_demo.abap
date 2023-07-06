@@ -29,8 +29,6 @@ FUNCTION zfm_raf00_out_demo.
         lo_res_tab  TYPE REF TO data,
         lo_res_data TYPE REF TO data.
 
-  DATA: ls_common_info_req TYPE zsapicom.
-
   FIELD-SYMBOLS: <fs_req_tab> TYPE ANY TABLE.
   FIELD-SYMBOLS: <fs_res_tab> TYPE ANY TABLE.
   FIELD-SYMBOLS: <fs_table> TYPE ANY TABLE.
