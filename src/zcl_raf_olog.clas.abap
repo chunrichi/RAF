@@ -1,44 +1,44 @@
-class ZCL_RAF_OLOG definition
-  public
-  final
-  create public .
+CLASS zcl_raf_olog DEFINITION
+  PUBLIC
+  FINAL
+  CREATE PUBLIC .
 
-public section.
+  PUBLIC SECTION.
 
-  class-data OSEND type ref to ZCL_RAF_OLOG .
-  data APINO type ZTRAF_LOG-APINO read-only .
-  data IFPOS type ZTRAF_LOG-IFPOS read-only .
-  data LOGID type ZTRAF_LOG-LOGID read-only .
-  class-data DGUID type ZTRAF_LOG-DGUID .
-  data IBTIMESTAMPL type TIMESTAMPL .
-  data PROGNAME type PROGNAME read-only .
+    CLASS-DATA osend TYPE REF TO zcl_raf_olog .
+    DATA apino TYPE ztraf_log-apino READ-ONLY .
+    DATA ifpos TYPE ztraf_log-ifpos READ-ONLY .
+    DATA logid TYPE ztraf_log-logid READ-ONLY .
+    CLASS-DATA dguid TYPE ztraf_log-dguid .
+    DATA ibtimestampl TYPE timestampl .
+    DATA progname TYPE progname READ-ONLY .
 
-  methods CONSTRUCTOR
-    importing
-      !APINO type ZTRAF_LOG-APINO .
-  class-methods CREATE_SEND_LOG
-    importing
-      !APINO type ZTRAF_LOG-APINO
-    returning
-      value(RVAL) type ref to ZCL_RAF_OLOG .
-  methods LOG
-    importing
-      !I_MSGTY type ZTRAF_LOG-MSGTY optional
-      !I_MSGTX type ZTRAF_LOG-MSGTX optional
-      !I_BSKEY type ZTRAF_LOG-BSKEY optional
-      !I_PROGNAME type PROGNAME optional
-      !I_NO_COMMIT type ABAP_BOOL default '' .
-  methods END
-    importing
-      !I_MSGTY type ZTRAF_LOG-MSGTY
-      !I_BSKEY type ZTRAF_LOG-BSKEY .
-  class-methods STORE_DATA
-    importing
-      !APINO type ZTRAF_LOG-APINO
-      !DIRIO type ZTRAF_LOG-DIRIO
-      !DATA type DATA .
-  class-methods FREE .
-  methods BEGIN_FLAG .
+    METHODS constructor
+      IMPORTING
+        !apino TYPE ztraf_log-apino .
+    CLASS-METHODS create_send_log
+      IMPORTING
+        !apino      TYPE ztraf_log-apino
+      RETURNING
+        VALUE(rval) TYPE REF TO zcl_raf_olog .
+    METHODS log
+      IMPORTING
+        !i_msgty     TYPE ztraf_log-msgty OPTIONAL
+        !i_msgtx     TYPE ztraf_log-msgtx OPTIONAL
+        !i_bskey     TYPE ztraf_log-bskey OPTIONAL
+        !i_progname  TYPE progname OPTIONAL
+        !i_no_commit TYPE abap_bool DEFAULT '' .
+    METHODS end
+      IMPORTING
+        !i_msgty TYPE ztraf_log-msgty
+        !i_bskey TYPE ztraf_log-bskey .
+    CLASS-METHODS store_data
+      IMPORTING
+        !apino TYPE ztraf_log-apino
+        !dirio TYPE ztraf_log-dirio
+        !data  TYPE data .
+    CLASS-METHODS free .
+    METHODS begin_flag .
   PROTECTED SECTION.
   PRIVATE SECTION.
 ENDCLASS.

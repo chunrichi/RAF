@@ -146,7 +146,7 @@ FUNCTION zfm_raf00_out_demo.
   ENDLOOP.
 
 *4 调用实例方法发送数据
-  CALL METHOD lo_handler->process
+  CALL METHOD lo_handler->request
     EXPORTING
       i_data = lo_req_data
     IMPORTING

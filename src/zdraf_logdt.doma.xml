@@ -21,7 +21,7 @@
      <VALPOS>0002</VALPOS>
      <DDLANGUAGE>1</DDLANGUAGE>
      <DOMVALUE_L>A</DOMVALUE_L>
-     <DDTEXT>记录报文及状态</DDTEXT>
+     <DDTEXT>记录状态&amp;调试报文</DDTEXT>
     </DD07V>
     <DD07V>
      <VALPOS>0003</VALPOS>

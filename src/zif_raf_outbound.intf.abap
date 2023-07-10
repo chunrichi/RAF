@@ -1,21 +1,21 @@
-INTERFACE zif_raf_outbound
-  PUBLIC .
+interface ZIF_RAF_OUTBOUND
+  public .
 
 
-  TYPES:
+  types:
     BEGIN OF ty_result,
       type    TYPE ztraf_log-msgty,
       message TYPE ztraf_log-msgtx,
     END OF ty_result .
 
-  DATA maintain_info TYPE ztraf_maintain .
-  DATA oconf_info TYPE ztraf_oconf .
-  DATA base_url TYPE ztraf_url_base-url .
-  DATA result TYPE ty_result .
+  data MAINTAIN_INFO type ZTRAF_MAINTAIN .
+  data OCONF_INFO type ZTRAF_OCONF .
+  data BASE_URL type ZTRAF_URL_BASE-URL .
+  data RESULT type TY_RESULT .
 
-  METHODS process
-    IMPORTING
-      !i_data TYPE REF TO data
-    EXPORTING
-      !e_data TYPE REF TO data .
-ENDINTERFACE.
+  methods REQUEST
+    importing
+      !I_DATA type ref to DATA
+    exporting
+      !E_DATA type ref to DATA .
+endinterface.

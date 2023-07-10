@@ -1,6 +1,5 @@
 CLASS zcl_raf_outbound_func DEFINITION
   PUBLIC
-  FINAL
   CREATE PUBLIC .
 
   PUBLIC SECTION.
@@ -13,14 +12,15 @@ CLASS zcl_raf_outbound_func DEFINITION
       RETURNING
         VALUE(handler) TYPE REF TO zif_raf_outbound .
   PROTECTED SECTION.
-  PRIVATE SECTION.
 
-    CLASS-METHODS readme .
     METHODS process_main
       IMPORTING
         !i_data TYPE REF TO data
       EXPORTING
         !e_data TYPE REF TO data .
+  PRIVATE SECTION.
+
+    CLASS-METHODS readme .
 ENDCLASS.
 
 
@@ -93,8 +93,10 @@ CLASS ZCL_RAF_OUTBOUND_FUNC IMPLEMENTATION.
     me->zif_raf_outbound~result = VALUE #( type = 'S' message = `http request success` ).
 
     " 日志时戳初始化
-    zcl_raf_olog=>create_send_log( me->zif_raf_outbound~maintain_info-apino
-      )->begin_flag( ).
+    IF me->zif_raf_outbound~maintain_info-logdt <> ''.
+      zcl_raf_olog=>create_send_log( me->zif_raf_outbound~maintain_info-apino
+        )->begin_flag( ).
+    ENDIF.
 
     " data2json
     lv_req_json = /ui2/cl_json=>serialize( data = i_data
@@ -239,7 +241,7 @@ CLASS ZCL_RAF_OUTBOUND_FUNC IMPLEMENTATION.
   ENDMETHOD.
 
 
-  METHOD zif_raf_outbound~process.
+  METHOD zif_raf_outbound~request.
 
     " 实际实施的时候可将此处直接复制
     " 调整逻辑拷贝 PROCESS_MAIN 逻辑 进行调整
@@ -248,9 +250,11 @@ CLASS ZCL_RAF_OUTBOUND_FUNC IMPLEMENTATION.
                   IMPORTING e_data = e_data ).
 
     " 处理异常
-    zcl_raf_olog=>create_send_log( me->zif_raf_outbound~maintain_info-apino
-      )->log( i_msgty = me->zif_raf_outbound~result-type
-              i_msgtx = me->zif_raf_outbound~result-message ).
+    IF me->zif_raf_outbound~maintain_info-logdt <> ''.
+      zcl_raf_olog=>create_send_log( me->zif_raf_outbound~maintain_info-apino
+        )->log( i_msgty = me->zif_raf_outbound~result-type
+                i_msgtx = me->zif_raf_outbound~result-message ).
+    ENDIF.
 
     CLEAR zcl_raf_olog=>dguid.
 
