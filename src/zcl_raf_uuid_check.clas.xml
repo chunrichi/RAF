@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_CLAS" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <VSEOCLASS>
+    <CLSNAME>ZCL_RAF_UUID_CHECK</CLSNAME>
+    <LANGU>1</LANGU>
+    <DESCRIPT>业务单据号唯一性校验</DESCRIPT>
+    <STATE>1</STATE>
+    <CLSCCINCL>X</CLSCCINCL>
+    <FIXPT>X</FIXPT>
+    <UNICODE>X</UNICODE>
+   </VSEOCLASS>
+   <DESCRIPTIONS_SUB>
+    <SEOSUBCOTX>
+     <CMPNAME>UPDATE_UNLOCK</CMPNAME>
+     <SCONAME>OBJECTCLAS</SCONAME>
+     <LANGU>1</LANGU>
+     <DESCRIPT>对象类</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>UPDATE_UNLOCK</CMPNAME>
+     <SCONAME>OBJECTID</SCONAME>
+     <LANGU>1</LANGU>
+     <DESCRIPT>对象值</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>UPDATE_UNLOCK</CMPNAME>
+     <SCONAME>RETURN</SCONAME>
+     <LANGU>1</LANGU>
+     <DESCRIPT>返回参数</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>UPDATE_UNLOCK</CMPNAME>
+     <SCONAME>UUID</SCONAME>
+     <LANGU>1</LANGU>
+     <DESCRIPT>全局唯一标识符</DESCRIPT>
+    </SEOSUBCOTX>
+   </DESCRIPTIONS_SUB>
+  </asx:values>
+ </asx:abap>
+</abapGit>
