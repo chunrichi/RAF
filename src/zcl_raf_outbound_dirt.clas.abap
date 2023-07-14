@@ -5,6 +5,8 @@ CLASS zcl_raf_outbound_dirt DEFINITION
 
   PUBLIC SECTION.
 
+    INTERFACES zif_raf_outbound .
+
     TYPES:
       BEGIN OF ty_key_value,
         key   TYPE string,
@@ -13,14 +15,13 @@ CLASS zcl_raf_outbound_dirt DEFINITION
     TYPES:
       tty_key_value TYPE TABLE OF ty_key_value .
 
-    INTERFACES zif_raf_outbound .
-
     METHODS constructor
       IMPORTING
         !apino   TYPE ztraf_log-apino
         !url     TYPE ztraf_oconf-url
         !headers TYPE tty_key_value OPTIONAL
-        !params  TYPE tty_key_value OPTIONAL.
+        !params  TYPE tty_key_value OPTIONAL
+        !jmode   TYPE ztraf_maintain-jmode OPTIONAL .
   PROTECTED SECTION.
 
     METHODS process
@@ -64,7 +65,8 @@ CLASS ZCL_RAF_OUTBOUND_DIRT IMPLEMENTATION.
     IF sy-subrc <> 0.
       " 允许找不到
       me->maintain_info = VALUE #( apino = COND #( WHEN apino IS NOT INITIAL THEN apino ELSE sy-cprog )
-                               logdt = 'A' ).
+                                   logdt = 'A'
+                                   jmode = jmode ).
     ELSE.
       me->maintain_info = ls_maintain.
     ENDIF.

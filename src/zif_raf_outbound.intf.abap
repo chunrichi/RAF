@@ -15,7 +15,7 @@ interface ZIF_RAF_OUTBOUND
 
   methods REQUEST
     importing
-      !I_DATA type ref to DATA
+      !I_DATA type DATA
     exporting
-      !E_DATA type ref to DATA .
+      !E_DATA type DATA .
 endinterface.
