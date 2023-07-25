@@ -12,6 +12,7 @@ CLASS zcl_raf_olog DEFINITION
     CLASS-DATA dguid TYPE ztraf_log-dguid .
     DATA ibtimestampl TYPE timestampl .
     DATA progname TYPE progname READ-ONLY .
+    CLASS-DATA log_in_clas TYPE rs_bool .
 
     METHODS constructor
       IMPORTING
@@ -105,6 +106,20 @@ CLASS ZCL_RAF_OLOG IMPLEMENTATION.
 
     DATA: ls_log TYPE ztraf_log.
     DATA: lv_timestampl TYPE timestampl.
+
+    IF log_in_clas = ''.
+      UPDATE ztraf_log SET msgty = i_msgty
+                           msgtx = i_msgtx
+                           bskey = i_bskey WHERE logid = me->logid
+                                             AND ifpos = me->ifpos
+                                             AND apino = me->apino.
+
+      IF i_no_commit = abap_false.
+        COMMIT WORK.
+      ENDIF.
+
+      RETURN.
+    ENDIF.
 
     GET TIME STAMP FIELD lv_timestampl.
     GET TIME.

@@ -19,6 +19,7 @@ CLASS zcl_raf_outbound_dirt DEFINITION
       IMPORTING
         !apino   TYPE ztraf_log-apino
         !url     TYPE ztraf_oconf-url
+        !method  TYPE ztraf_oconf-method DEFAULT 'POST'
         !headers TYPE tty_key_value OPTIONAL
         !params  TYPE tty_key_value OPTIONAL
         !jmode   TYPE ztraf_maintain-jmode OPTIONAL .
@@ -67,8 +68,16 @@ CLASS ZCL_RAF_OUTBOUND_DIRT IMPLEMENTATION.
       me->maintain_info = VALUE #( apino = COND #( WHEN apino IS NOT INITIAL THEN apino ELSE sy-cprog )
                                    logdt = 'A'
                                    jmode = jmode ).
+
+      me->zif_raf_outbound~oconf_info-method = method.
     ELSE.
       me->maintain_info = ls_maintain.
+
+      SELECT SINGLE
+        *
+        FROM ztraf_oconf
+        WHERE apino = @apino
+        INTO @me->zif_raf_outbound~oconf_info.
     ENDIF.
 
     me->url = url.
@@ -259,6 +268,8 @@ CLASS ZCL_RAF_OUTBOUND_DIRT IMPLEMENTATION.
 
   METHOD zif_raf_outbound~request.
 
+    zcl_raf_olog=>log_in_clas = 'X'.
+
     process( EXPORTING i_data = i_data
              IMPORTING e_data = e_data ).
 
@@ -270,6 +281,7 @@ CLASS ZCL_RAF_OUTBOUND_DIRT IMPLEMENTATION.
     ENDIF.
 
     CLEAR zcl_raf_olog=>dguid.
+    CLEAR zcl_raf_olog=>log_in_clas.
 
   ENDMETHOD.
 ENDCLASS.

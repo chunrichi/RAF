@@ -43,6 +43,11 @@
      <DESCRIPT>16 Byte UUID in 32 Characters (Hexadecimal Encoded)</DESCRIPT>
     </SEOCOMPOTX>
     <SEOCOMPOTX>
+     <CMPNAME>LOG_IN_CLAS</CMPNAME>
+     <LANGU>1</LANGU>
+     <DESCRIPT>处理类中运行</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
      <CMPNAME>OSEND</CMPNAME>
      <LANGU>1</LANGU>
      <DESCRIPT>outbound log</DESCRIPT>

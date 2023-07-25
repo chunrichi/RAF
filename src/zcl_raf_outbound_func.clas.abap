@@ -246,6 +246,8 @@ CLASS ZCL_RAF_OUTBOUND_FUNC IMPLEMENTATION.
     " 实际实施的时候可将此处直接复制
     " 调整逻辑拷贝 PROCESS_MAIN 逻辑 进行调整
 
+    zcl_raf_olog=>log_in_clas = 'X'.
+
     process_main( EXPORTING i_data = i_data
                   IMPORTING e_data = e_data ).
 
@@ -257,6 +259,7 @@ CLASS ZCL_RAF_OUTBOUND_FUNC IMPLEMENTATION.
     ENDIF.
 
     CLEAR zcl_raf_olog=>dguid.
+    CLEAR zcl_raf_olog=>log_in_clas.
 
   ENDMETHOD.
 ENDCLASS.

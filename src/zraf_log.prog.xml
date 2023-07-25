@@ -2044,6 +2044,12 @@
     </item>
     <item>
      <ID>I</ID>
+     <KEY>M01</KEY>
+     <ENTRY>未查询到数据</ENTRY>
+     <LENGTH>16</LENGTH>
+    </item>
+    <item>
+     <ID>I</ID>
      <KEY>SUC</KEY>
      <ENTRY>成功</ENTRY>
      <LENGTH>12</LENGTH>
