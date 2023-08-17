@@ -107,7 +107,7 @@ CLASS ZCL_RAF_OLOG IMPLEMENTATION.
     DATA: ls_log TYPE ztraf_log.
     DATA: lv_timestampl TYPE timestampl.
 
-    IF log_in_clas = ''.
+    IF zcl_raf_olog=>log_in_clas = ''.
       UPDATE ztraf_log SET msgty = i_msgty
                            msgtx = i_msgtx
                            bskey = i_bskey WHERE logid = me->logid

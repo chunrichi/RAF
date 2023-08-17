@@ -122,7 +122,7 @@ CLASS ZCL_RAF_OUTBOUND_DIRT IMPLEMENTATION.
     IF me->zif_raf_outbound~maintain_info-logdt = 'A'.
       " 记录所有日志
       zcl_raf_olog=>store_data( apino = me->zif_raf_outbound~maintain_info-apino
-                                dirio = 'O'
+                                dirio = 'I'
                                 data  = lv_req_json ).
     ENDIF.
 
@@ -238,7 +238,7 @@ CLASS ZCL_RAF_OUTBOUND_DIRT IMPLEMENTATION.
     IF me->zif_raf_outbound~maintain_info-logdt = 'A'.
       " 记录所有日志
       zcl_raf_olog=>store_data( apino = me->zif_raf_outbound~maintain_info-apino
-                                dirio = 'I'
+                                dirio = 'O'
                                 data  = lv_res_json ).
     ENDIF.
 
