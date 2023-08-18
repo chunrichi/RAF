@@ -18,7 +18,7 @@ CLASS zcl_raf_outbound_dirt DEFINITION
     METHODS constructor
       IMPORTING
         !apino   TYPE ztraf_log-apino
-        !url     TYPE ztraf_oconf-url
+        !url     TYPE ztraf_oconf-url OPTIONAL
         !method  TYPE ztraf_oconf-method DEFAULT 'POST'
         !headers TYPE tty_key_value OPTIONAL
         !params  TYPE tty_key_value OPTIONAL
@@ -70,6 +70,8 @@ CLASS ZCL_RAF_OUTBOUND_DIRT IMPLEMENTATION.
                                    jmode = jmode ).
 
       me->zif_raf_outbound~oconf_info-method = method.
+
+      me->url = url.
     ELSE.
       me->maintain_info = ls_maintain.
 
@@ -78,9 +80,19 @@ CLASS ZCL_RAF_OUTBOUND_DIRT IMPLEMENTATION.
         FROM ztraf_oconf
         WHERE apino = @apino
         INTO @me->zif_raf_outbound~oconf_info.
+
+      SELECT SINGLE
+        sysid,
+        url
+        FROM ztraf_url_base
+        WHERE targt = @ls_maintain-targt
+          AND sysid = @sy-sysid
+        INTO @DATA(ls_url).
+
+      " 固定连接 拼接 常用连接
+      me->url = ls_url-url && me->zif_raf_outbound~oconf_info-url.
     ENDIF.
 
-    me->url = url.
     me->params = params.
     me->headers = headers.
 
