@@ -1,6 +1,12 @@
 *---------------------------------------------------------------------*
 *    view related data declarations
 *---------------------------------------------------------------------*
+*...processing: ZTRAF_CONFIG....................................*
+DATA:  BEGIN OF STATUS_ZTRAF_CONFIG                  .   "state vector
+         INCLUDE STRUCTURE VIMSTATUS.
+DATA:  END OF STATUS_ZTRAF_CONFIG                  .
+CONTROLS: TCTRL_ZTRAF_CONFIG
+            TYPE TABLEVIEW USING SCREEN '0005'.
 *...processing: ZTRAF_ICONF.....................................*
 DATA:  BEGIN OF STATUS_ZTRAF_ICONF                   .   "state vector
          INCLUDE STRUCTURE VIMSTATUS.
@@ -26,10 +32,12 @@ DATA:  END OF STATUS_ZTRAF_URL_BASE                .
 CONTROLS: TCTRL_ZTRAF_URL_BASE
             TYPE TABLEVIEW USING SCREEN '0004'.
 *.........table declarations:.................................*
+TABLES: *ZTRAF_CONFIG                  .
 TABLES: *ZTRAF_ICONF                   .
 TABLES: *ZTRAF_MAINTAIN                .
 TABLES: *ZTRAF_OCONF                   .
 TABLES: *ZTRAF_URL_BASE                .
+TABLES: ZTRAF_CONFIG                   .
 TABLES: ZTRAF_ICONF                    .
 TABLES: ZTRAF_MAINTAIN                 .
 TABLES: ZTRAF_OCONF                    .
