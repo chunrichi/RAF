@@ -130,6 +130,8 @@ CLASS ZCL_RAF_OUTBOUND_DIRT IMPLEMENTATION.
     lv_req_json = /ui2/cl_json=>serialize( data = i_data
                                            pretty_name = me->zif_raf_outbound~maintain_info-jmode ).
 
+    RAISE EVENT zif_raf_outbound~after_abap2json EXPORTING er_json = REF #( lv_req_json ).
+
     " 日志
     IF me->zif_raf_outbound~maintain_info-logdt = 'A'.
       " 记录所有日志
