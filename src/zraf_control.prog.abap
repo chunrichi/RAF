@@ -16,10 +16,12 @@ REPORT zraf_control.
 *                     Types
 *&----------------------------------------------------------------------
 TYPES: BEGIN OF ts_tcode_map,
-         ucomm  TYPE sy-ucomm,   " 按钮的功能代码
-         tcode  TYPE sy-tcode,   " 按钮对应的事务码
-         object TYPE char20,     " 处理对象
-         text   TYPE char40,     " 文本
+         ucomm     TYPE sy-ucomm,   " 按钮的功能代码
+         tcode     TYPE sy-tcode,   " 按钮对应的事务码
+         object    TYPE char20,     " 处理对象
+         text      TYPE char40,     " 文本
+
+         name_form TYPE char20,
        END OF ts_tcode_map.
 
 TYPES: BEGIN OF ts_btn_name,
@@ -106,6 +108,10 @@ SELECTION-SCREEN BEGIN OF BLOCK blck5 WITH FRAME TITLE TEXT-t05.
   SELECTION-SCREEN: END OF LINE.
 
 SELECTION-SCREEN END OF BLOCK blck5.
+
+SELECTION-SCREEN BEGIN OF SCREEN 1001.
+  PARAMETERS: p_day TYPE i.
+SELECTION-SCREEN END OF SCREEN 1001.
 
 *&----------------------------------------------------------------------
 *                     Initialization
@@ -251,12 +257,14 @@ FORM frm_set_tcodemap .
 *    ( ucomm = 'P03' tcode = 'SE38' object = 'ZAPIMG_REST_TEST' text = TEXT-303 )   " REST 接口测试
     " 日志功能
     ( ucomm = 'L01' tcode = 'SE38' object = 'ZRAF_LOG'         text = TEXT-401 )   " 接口日志查询
-*    ( ucomm = 'L02' tcode = 'SE38' object = 'ZAPIMG_SEARCH'    text = TEXT-402 )   " 接口内容查询
+    ( ucomm = 'L02' tcode = 'SE38' object = 'ZRAF_LOG_SEARCH'  text = TEXT-402 )   " 接口内容查询
     " JOB
-*    ( ucomm = 'J01' tcode = 'FORM' object = 'FRM_JOB_CHECK01'  text = TEXT-501 )   " JOB 邮件通知接口异常
+    ( ucomm = 'J01' tcode = 'FORM' object = 'FRM_JOB_CHECK01'  text = TEXT-501
+                    name_form = 'FRM_NAME_J01' )   " JOB -> 定时清理报文 job （保留 7 天）
   ).
 
   SORT gt_tcode_map BY ucomm.
+
 ENDFORM.
 *&---------------------------------------------------------------------*
 *& Form FRM_TRANSACTION_TCODE

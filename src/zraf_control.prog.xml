@@ -48,6 +48,12 @@
     </item>
     <item>
      <ID>I</ID>
+     <KEY>402</KEY>
+     <ENTRY>接口内容查询</ENTRY>
+     <LENGTH>16</LENGTH>
+    </item>
+    <item>
+     <ID>I</ID>
      <KEY>T01</KEY>
      <ENTRY>表维护</ENTRY>
      <LENGTH>13</LENGTH>
