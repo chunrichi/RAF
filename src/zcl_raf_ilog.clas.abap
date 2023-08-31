@@ -103,6 +103,7 @@ CLASS ZCL_RAF_ILOG IMPLEMENTATION.
 
       me->ztraf_log-dguid = zcl_raf_inbound_func=>dguid.
       me->ztraf_log-uname = sy-uname.
+      me->ztraf_log-batch = sy-batch.
 
       MODIFY ztraf_log FROM me->ztraf_log.
       COMMIT WORK.

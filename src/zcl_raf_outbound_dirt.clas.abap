@@ -142,6 +142,11 @@ CLASS ZCL_RAF_OUTBOUND_DIRT IMPLEMENTATION.
 
     " url
     lv_url = me->url.
+    IF lv_url IS INITIAL.
+      me->zif_raf_outbound~result-type = 'E'.
+      me->zif_raf_outbound~result-message = 'Url No Set !'.
+      RETURN.
+    ENDIF.
 
     IF me->params IS NOT INITIAL.
 

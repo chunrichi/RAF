@@ -56,6 +56,12 @@
      <MSGNR>007</MSGNR>
      <TEXT>ERP端API调用异常，请联系ERP管理员。</TEXT>
     </T100>
+    <T100>
+     <SPRSL>1</SPRSL>
+     <ARBGB>ZRAF00</ARBGB>
+     <MSGNR>008</MSGNR>
+     <TEXT>查到 &amp; 条数据</TEXT>
+    </T100>
    </T100>
   </asx:values>
  </asx:abap>

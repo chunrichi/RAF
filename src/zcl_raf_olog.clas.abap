@@ -32,7 +32,7 @@ CLASS zcl_raf_olog DEFINITION
     METHODS end
       IMPORTING
         !i_msgty TYPE ztraf_log-msgty
-        !i_bskey TYPE ztraf_log-bskey .
+        !i_bskey TYPE ztraf_log-bskey OPTIONAL.
     CLASS-METHODS store_data
       IMPORTING
         !apino TYPE ztraf_log-apino
@@ -107,7 +107,8 @@ CLASS ZCL_RAF_OLOG IMPLEMENTATION.
     DATA: ls_log TYPE ztraf_log.
     DATA: lv_timestampl TYPE timestampl.
 
-    IF zcl_raf_olog=>log_in_clas = ''.
+    IF zcl_raf_olog=>log_in_clas = '' AND i_progname IS INITIAL.
+      " 不在程序里 并且没指定 progname
       UPDATE ztraf_log SET msgty = i_msgty
                            msgtx = i_msgtx
                            bskey = i_bskey WHERE logid = me->logid
@@ -125,11 +126,7 @@ CLASS ZCL_RAF_OLOG IMPLEMENTATION.
     GET TIME.
 
     " >> 行号区分
-    IF me->ifpos = 0.
-      me->ifpos = 1.
-    ELSE.
-      ADD 1 TO me->ifpos.
-    ENDIF.
+    ADD 1 TO me->ifpos.
 
     " >> 生成 UUID
     IF me->logid IS INITIAL.
@@ -158,6 +155,7 @@ CLASS ZCL_RAF_OLOG IMPLEMENTATION.
     ls_log-ifpos  = me->ifpos.               " 日志行号
 
     ls_log-dirio  = 'O'.
+    ls_log-batch  = sy-batch.
     ls_log-sdate  = sy-datum.
     ls_log-stime  = sy-uzeit.
     ls_log-uname  = sy-uname.                " 用户名

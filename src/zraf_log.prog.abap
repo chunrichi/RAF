@@ -452,7 +452,7 @@ FORM frm_set_fieldcat .
   PERFORM frm_set_fcat USING 'LOGID'     'ZTRAF_LOG'  'LOGID'         TEXT-002. " 日志ID
   PERFORM frm_set_fcat USING 'APINO'     'ZTRAF_LOG'  'APINO'         TEXT-003. " 接口ID
   PERFORM frm_set_fcat USING 'APITX'     'ZTRAF_MAINTAIN' 'APITX'     TEXT-004. " 接口描述
-* PERFORM frm_set_fcat USING 'PROGNAME'  'ZTRAF_LOG'  'PROGNAME'     TEXT-005. " 调用程序
+* PERFORM frm_set_fcat USING 'PROGNAME'  'ZTRAF_LOG'  'PROGNAME'      TEXT-0005 " 调用程序
   PERFORM frm_set_fcat USING 'DIRIO'     'ZTRAF_LOG'  'DIRIO'         TEXT-006. " 方向
   PERFORM frm_set_fcat USING 'LOG_I'     ''           ''              TEXT-007. " 请求报文
   PERFORM frm_set_fcat USING 'LOG_O'     ''           ''              TEXT-008. " 返回报文
@@ -462,11 +462,12 @@ FORM frm_set_fieldcat .
   PERFORM frm_set_fcat USING 'RDATE'     'ZTRAF_LOG'  'SDATE'         TEXT-012. " 返回日期
   PERFORM frm_set_fcat USING 'RTIME'     'ZTRAF_LOG'  'STIME'         TEXT-013. " 返回时间
   PERFORM frm_set_fcat USING 'SDIFF'     'ZTRAF_LOG'  'B_STAMP_L'     TEXT-014. " 耗时
-  PERFORM frm_set_fcat USING 'UNAME'     'ZTRAF_LOG'  'UNAME'         TEXT-015. " 用户名
-* PERFORM frm_set_fcat USING 'TUNAM'     'ZTRAF_LOG'  'TUNAM'         TEXT-016. " PO用户名
-  PERFORM frm_set_fcat USING 'MSGTY'     'ZTRAF_LOG'  'MSGTY'         TEXT-017. " 消息类型
-  PERFORM frm_set_fcat USING 'MSGTX'     'ZTRAF_LOG'  'MSGTX'         TEXT-018. " 消息文本
-  PERFORM frm_set_fcat USING 'BSKEY'     'ZTRAF_LOG'  'BSKEY'         TEXT-019. " 业务关键字
+  PERFORM frm_set_fcat USING 'BATCH'     'ZTRAF_LOG'  'BATCH'         TEXT-015. " 后台执行
+  PERFORM frm_set_fcat USING 'UNAME'     'ZTRAF_LOG'  'UNAME'         TEXT-016. " 用户名
+* PERFORM frm_set_fcat USING 'TUNAM'     'ZTRAF_LOG'  'TUNAM'         TEXT-017. " PO用户名
+  PERFORM frm_set_fcat USING 'MSGTY'     'ZTRAF_LOG'  'MSGTY'         TEXT-018. " 消息类型
+  PERFORM frm_set_fcat USING 'MSGTX'     'ZTRAF_LOG'  'MSGTX'         TEXT-019. " 消息文本
+  PERFORM frm_set_fcat USING 'BSKEY'     'ZTRAF_LOG'  'BSKEY'         TEXT-020. " 业务关键字
 
 ENDFORM.
 *&---------------------------------------------------------------------*
@@ -493,7 +494,7 @@ FORM frm_set_fcat USING   p_fieldname
                            scrtext_m  = p_coltext
                            scrtext_s  = p_coltext ) TO gt_fieldcat ASSIGNING FIELD-SYMBOL(<ls_fieldcat>).
 
-  IF lv_filedname = 'CBOX'.
+  IF lv_filedname = 'CBOX' OR lv_filedname = 'BATCH'.
     <ls_fieldcat>-checkbox = abap_true.
   ENDIF.
 
@@ -534,7 +535,7 @@ FORM frm_alv_display .
 
   lv_lines = lines( gt_display ).
   IF lv_lines <> 0.
-    MESSAGE s008(zxx01) WITH lv_lines. " 查到 & 条数据
+    MESSAGE s008(zraf00) WITH lv_lines. " 查到 & 条数据
   ENDIF.
 
   ls_variant-report = sy-repid.

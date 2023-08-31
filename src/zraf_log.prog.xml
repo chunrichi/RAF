@@ -1968,7 +1968,7 @@
      <ID>I</ID>
      <KEY>009</KEY>
      <ENTRY>数据ID</ENTRY>
-     <LENGTH>16</LENGTH>
+     <LENGTH>14</LENGTH>
     </item>
     <item>
      <ID>I</ID>
@@ -2003,30 +2003,36 @@
     <item>
      <ID>I</ID>
      <KEY>015</KEY>
+     <ENTRY>后台执行</ENTRY>
+     <LENGTH>14</LENGTH>
+    </item>
+    <item>
+     <ID>I</ID>
+     <KEY>016</KEY>
      <ENTRY>用户名</ENTRY>
      <LENGTH>13</LENGTH>
     </item>
     <item>
      <ID>I</ID>
-     <KEY>016</KEY>
+     <KEY>017</KEY>
      <ENTRY>PO用户名</ENTRY>
      <LENGTH>15</LENGTH>
     </item>
     <item>
      <ID>I</ID>
-     <KEY>017</KEY>
+     <KEY>018</KEY>
      <ENTRY>消息类型</ENTRY>
      <LENGTH>14</LENGTH>
     </item>
     <item>
      <ID>I</ID>
-     <KEY>018</KEY>
+     <KEY>019</KEY>
      <ENTRY>消息文本</ENTRY>
      <LENGTH>14</LENGTH>
     </item>
     <item>
      <ID>I</ID>
-     <KEY>019</KEY>
+     <KEY>020</KEY>
      <ENTRY>业务关键字</ENTRY>
      <LENGTH>15</LENGTH>
     </item>
