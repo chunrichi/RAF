@@ -36,7 +36,6 @@ CLASS ZCL_RAF_UUID_CHECK IMPLEMENTATION.
   METHOD check_lock.
     DATA: lv_varkey TYPE rstable-varkey,
           ls_varkey TYPE ty_varkey.
-    DATA: ls_ztraf_ikey TYPE ztraf_ikey.
 
     " 程序加锁
 
@@ -67,12 +66,12 @@ CLASS ZCL_RAF_UUID_CHECK IMPLEMENTATION.
         SELECT SINGLE
           *
           FROM ztraf_ikey
-          INTO ls_ztraf_ikey
+          INTO created
           WHERE objectclas = objectclas
             AND uuid = uuid.
         IF sy-subrc = 0.
           return-type = 'W'.
-          CONCATENATE objectclas uuid '已经创建对象' ls_ztraf_ikey-objectid INTO return-message.
+          CONCATENATE objectclas uuid '已经创建对象' created-objectid INTO return-message.
 
           CALL FUNCTION 'DEQUEUE_E_TABLE'
             EXPORTING
