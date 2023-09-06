@@ -322,8 +322,11 @@ FORM frm_get_data .
       <ls_display>-light = icon_led_red.
     ELSEIF <ls_display>-msgty = 'S'.
       <ls_display>-light = icon_led_green.
+    ELSEIF <ls_display>-msgty = 'W'.
+      <ls_display>-light = icon_led_yellow.
     ELSE.
-      <ls_display>-light = icon_led_yellow. " ICON_LED_INACTIVE
+      " 'I' OR SPACE
+      <ls_display>-light = icon_space. " icon_led_inactive
     ENDIF.
 
     " > 排序主键
@@ -452,7 +455,7 @@ FORM frm_set_fieldcat .
   PERFORM frm_set_fcat USING 'LOGID'     'ZTRAF_LOG'  'LOGID'         TEXT-002. " 日志ID
   PERFORM frm_set_fcat USING 'APINO'     'ZTRAF_LOG'  'APINO'         TEXT-003. " 接口ID
   PERFORM frm_set_fcat USING 'APITX'     'ZTRAF_MAINTAIN' 'APITX'     TEXT-004. " 接口描述
-* PERFORM frm_set_fcat USING 'PROGNAME'  'ZTRAF_LOG'  'PROGNAME'      TEXT-0005 " 调用程序
+  PERFORM frm_set_fcat USING 'PROGNAME'  'ZTRAF_LOG'  'PROGNAME'      TEXT-005. " 调用程序
   PERFORM frm_set_fcat USING 'DIRIO'     'ZTRAF_LOG'  'DIRIO'         TEXT-006. " 方向
   PERFORM frm_set_fcat USING 'LOG_I'     ''           ''              TEXT-007. " 请求报文
   PERFORM frm_set_fcat USING 'LOG_O'     ''           ''              TEXT-008. " 返回报文
