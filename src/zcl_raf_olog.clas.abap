@@ -82,7 +82,7 @@ CLASS ZCL_RAF_OLOG IMPLEMENTATION.
     UPDATE ztraf_log SET msgty = i_msgty
                          bskey = i_bskey
                          e_stamp_l = lv_timestampl
-                   WHERE logid = me->dguid
+                   WHERE logid = me->logid
                      AND ifpos = 1.
     COMMIT WORK.
 
