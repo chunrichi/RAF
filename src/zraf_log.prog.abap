@@ -105,6 +105,12 @@ CLASS lcl_alv_events DEFINITION CREATE PUBLIC FINAL.
     METHODS double_click_log IMPORTING e_row     TYPE lvc_s_row
                                        e_column  TYPE lvc_s_col
                                        es_row_no TYPE lvc_s_roid.
+
+    " 双击 显示程序
+    METHODS double_click_prog IMPORTING e_row     TYPE lvc_s_row
+                                        e_column  TYPE lvc_s_col
+                                        es_row_no TYPE lvc_s_roid.
+
     " 按钮 刷新
     METHODS btn_refresh IMPORTING grid TYPE REF TO cl_gui_alv_grid.
 ENDCLASS.
@@ -307,6 +313,13 @@ FORM frm_get_data .
     INTO TABLE @DATA(lt_ztapi001t).
   SORT lt_ztapi001t BY apino.
 
+  SELECT
+    apino,
+    func_name
+    FROM ztraf_iconf
+    INTO TABLE @DATA(lt_iconf).
+  SORT lt_iconf BY apino.
+
   DATA: lv_sort_key TYPE ty_display-sort_key.
 
   SORT gt_display BY logid.
@@ -345,6 +358,12 @@ FORM frm_get_data .
       TIME ZONE sy-zonlo
         INTO DATE <ls_display>-rdate
              TIME <ls_display>-rtime.
+
+    " 程序名
+    READ TABLE lt_iconf INTO DATA(ls_iconf) WITH KEY apino = <ls_display>-apino BINARY SEARCH.
+    IF sy-subrc = 0.
+      <ls_display>-progname = ls_iconf-func_name.
+    ENDIF.
 
   ENDLOOP.
 
@@ -684,6 +703,8 @@ CLASS lcl_alv_events IMPLEMENTATION.
       WHEN 'LOG_I' OR 'LOG_O'.
         " 显示 xml 报文
         me->double_click_log( e_row = e_row e_column = e_column es_row_no = es_row_no ).
+      WHEN 'PROGNAME'.
+        me->double_click_prog( e_row = e_row e_column = e_column es_row_no = es_row_no ).
     ENDCASE.
 
   ENDMETHOD.
@@ -725,6 +746,23 @@ CLASS lcl_alv_events IMPLEMENTATION.
           cl_abap_browser=>show_html( html_string = lv_convert ).
         ENDIF.
       ENDIF.
+    ENDIF.
+  ENDMETHOD.
+
+  METHOD double_click_prog.
+    " 显示 程序 跳转
+
+    READ TABLE gt_display INTO DATA(ls_display) INDEX e_row-index.
+    IF sy-subrc = 0.
+      CASE ls_display-dirio.
+        WHEN 'I'.
+          SET PARAMETER ID 'LIB' FIELD ls_display-progname.
+          CALL TRANSACTION 'SE37' AND SKIP FIRST SCREEN.
+        WHEN 'O'.
+          SET PARAMETER ID 'RID' FIELD ls_display-progname.
+          CALL TRANSACTION 'SE38' AND SKIP FIRST SCREEN.
+        WHEN OTHERS.
+      ENDCASE.
     ENDIF.
   ENDMETHOD.
 
