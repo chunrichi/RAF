@@ -20,9 +20,6 @@ TABLES: ztraf_config.
 DATA: gv_edit_01 TYPE rs_bool.
 DATA: gv_edit_02 TYPE rs_bool.
 
-CONSTANTS: gc_set01 TYPE ztraf_config-rafset VALUE `job/keep_log_days`.
-CONSTANTS: gc_set02 TYPE ztraf_config-rafset VALUE `job/keep_log_data_days`.
-
 *&----------------------------------------------------------------------
 *                     Select Screen
 *&----------------------------------------------------------------------
@@ -100,14 +97,14 @@ AT SELECTION-SCREEN.
       be01 = COND #( WHEN gv_edit_01 = 'X' THEN '保存'(t03) ELSE '编辑'(t02) ).
 
       IF gv_edit_01 = ''.
-        gr_config->set( set = gc_set01 val = |{ p_dl01 }| ).
+        gr_config->set( set = zcl_raf_config=>c_job_keep_log_days val = |{ p_dl01 }| ).
       ENDIF.
     WHEN 'BE02'.
       gv_edit_02 = boolc( gv_edit_02 = '' ).
       be02 = COND #( WHEN gv_edit_02 = 'X' THEN '保存'(t03) ELSE '编辑'(t02) ).
 
       IF gv_edit_01 = ''.
-        gr_config->set( set = gc_set02 val = |{ p_dl02 }| ).
+        gr_config->set( set = zcl_raf_config=>c_job_keep_log_data_days val = |{ p_dl02 }| ).
       ENDIF.
   ENDCASE.
 
@@ -131,14 +128,14 @@ START-OF-SELECTION.
 *&---------------------------------------------------------------------*
 FORM frm_load_config_days .
 
-  DATA(keep_days) = gr_config->get( gc_set01 ).
+  DATA(keep_days) = gr_config->get( zcl_raf_config=>c_job_keep_log_days ).
   IF gr_config->subrc = 0.
     p_dl01 = keep_days.
   ELSE.
     p_dl01 = 90.
   ENDIF.
 
-  DATA(keep_data_days) = gr_config->get( gc_set02 ).
+  DATA(keep_data_days) = gr_config->get( zcl_raf_config=>c_job_keep_log_data_days ).
   IF gr_config->subrc = 0.
     p_dl02 = keep_data_days.
   ELSE.

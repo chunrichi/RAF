@@ -6,6 +6,9 @@ CLASS zcl_raf_config DEFINITION
   PUBLIC SECTION.
 
     DATA subrc TYPE sysubrc READ-ONLY .
+    CLASS-DATA c_job_keep_log_days TYPE ztraf_config-rafset READ-ONLY VALUE `job/keep_log_days` ##NO_TEXT.
+    CLASS-DATA c_job_keep_log_data_days TYPE ztraf_config-rafset READ-ONLY VALUE `job/keep_log_data_days` ##NO_TEXT.
+    CLASS-DATA c_base_apino_in_subrouter TYPE ztraf_config-rafset READ-ONLY VALUE `base/apino_in_subrouter` ##NO_TEXT.
 
     METHODS constructor .
     METHODS get
