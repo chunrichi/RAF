@@ -93,7 +93,7 @@ SELECTION-SCREEN BEGIN OF BLOCK blck4 WITH FRAME TITLE TEXT-t04.
   SELECTION-SCREEN: BEGIN OF LINE.
     SELECTION-SCREEN: PUSHBUTTON 2(30)   tl01 USER-COMMAND l01 MODIF ID l01.
     SELECTION-SCREEN: PUSHBUTTON 40(30)  tl02 USER-COMMAND l02 MODIF ID l02.
-    SELECTION-SCREEN: PUSHBUTTON 78(30)  ti03 USER-COMMAND i03 MODIF ID i03.
+    SELECTION-SCREEN: PUSHBUTTON 78(30)  tl03 USER-COMMAND l03 MODIF ID l03.
   SELECTION-SCREEN: END OF LINE.
 
 SELECTION-SCREEN END OF BLOCK blck4.
@@ -258,9 +258,10 @@ FORM frm_set_tcodemap .
     " 日志功能
     ( ucomm = 'L01' tcode = 'SE38' object = 'ZRAF_LOG'         text = TEXT-401 )   " 接口日志查询
     ( ucomm = 'L02' tcode = 'SE38' object = 'ZRAF_LOG_SEARCH'  text = TEXT-402 )   " 接口内容查询
+    ( ucomm = 'L03' tcode = 'SE38' object = 'ZRAF_JOB4LOG'     text = TEXT-403 )   " 日志清理
     " JOB
-    ( ucomm = 'J01' tcode = 'FORM' object = 'FRM_JOB_CHECK01'  text = TEXT-501
-                    name_form = 'FRM_NAME_J01' )   " JOB -> 定时清理报文 job （保留 7 天）
+    "( ucomm = 'J01' tcode = 'FORM' object = 'FRM_JOB_CHECK01'  text = TEXT-501
+    "                name_form = 'FRM_NAME_J01' )   " JOB -> 定时清理报文 job （保留 7 天）
   ).
 
   SORT gt_tcode_map BY ucomm.

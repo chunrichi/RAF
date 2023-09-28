@@ -54,6 +54,12 @@
     </item>
     <item>
      <ID>I</ID>
+     <KEY>403</KEY>
+     <ENTRY>日志清理</ENTRY>
+     <LENGTH>14</LENGTH>
+    </item>
+    <item>
+     <ID>I</ID>
      <KEY>T01</KEY>
      <ENTRY>表维护</ENTRY>
      <LENGTH>13</LENGTH>
