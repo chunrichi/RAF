@@ -45,3 +45,14 @@ FORM frm_change_ztraf_url_base .
   ztraf_url_base-changer = sy-uname.
 
 ENDFORM.
+*&---------------------------------------------------------------------*
+*& Form FRM_CHANGE_ZTRAF_CONFIG
+*&---------------------------------------------------------------------*
+*& 更改更新时戳等信息
+*&---------------------------------------------------------------------*
+FORM frm_change_ztraf_config .
+
+  GET TIME STAMP FIELD ztraf_config-ctimestamp.
+  ztraf_config-changer = sy-uname.
+
+ENDFORM.

@@ -64,7 +64,7 @@ CLASS ZCL_RAF_CONFIG IMPLEMENTATION.
     ls_config-rafset = set.
     ls_config-rafvalue = val.
 
-    GET TIME STAMP FIELD ls_config-timestamp.
+    GET TIME STAMP FIELD ls_config-ctimestamp.
     ls_config-changer = sy-uname.
 
     MODIFY ztraf_config FROM ls_config.
