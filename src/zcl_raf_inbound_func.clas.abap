@@ -14,6 +14,8 @@ CLASS zcl_raf_inbound_func DEFINITION
 
     DATA raf_maintain TYPE ztraf_maintain .
     DATA raf_iconf TYPE ztraf_iconf .
+    DATA o_config TYPE REF TO zcl_raf_config .
+    DATA fdump TYPE flag .
 
     CLASS-METHODS readme .
     METHODS check_apino
@@ -31,6 +33,7 @@ CLASS zcl_raf_inbound_func DEFINITION
         !server        TYPE REF TO if_http_server
         !msg           TYPE symsg
         !reason        TYPE string
+        !code          TYPE i DEFAULT 400
       RETURNING
         VALUE(message) TYPE string .
     METHODS maintain_inbound
@@ -112,6 +115,9 @@ CLASS ZCL_RAF_INBOUND_FUNC IMPLEMENTATION.
           lv_res_json TYPE string.
     DATA: lv_apino TYPE ztraf_log-apino.
 
+    " 配置信息
+    me->o_config = NEW #( ).
+
     " 检查 请求类型
     DATA(lv_method) = server->request->get_method( ).
     IF lv_method <> 'POST'.
@@ -135,7 +141,13 @@ CLASS ZCL_RAF_INBOUND_FUNC IMPLEMENTATION.
     ENDIF.
 
     " 检查 APINO 是否配置
-    lv_apino = server->request->if_http_entity~get_form_field( `apino` ).
+    IF me->o_config->get( zcl_raf_config=>c_base_apino_in_subrouter ) = 'X'.
+      DATA(lv_url_sub) = server->request->get_header_field( `~path_info_expanded` ).
+      SPLIT lv_url_sub AT '/'  INTO TABLE DATA(lt_url_sub).
+      lv_apino = VALUE #( lt_url_sub[ 2 ] OPTIONAL ).
+    ELSE.
+      lv_apino = server->request->if_http_entity~get_form_field( `apino` ).
+    ENDIF.
     IF me->check_apino( lv_apino ).
       " 001  & no found. 002 apino in obligatory!
       me->set_message( server = server
@@ -163,6 +175,11 @@ CLASS ZCL_RAF_INBOUND_FUNC IMPLEMENTATION.
 
     IF me->raf_maintain-logdt = 'A'. " 记录所有
       me->store_xdata( str = lv_res_json dirio = 'O' ).
+    ENDIF.
+
+    IF me->fdump = 'X'.
+      CLEAR me->fdump.
+      RETURN.
     ENDIF.
 
     " 设置接口成功调用的的状态
@@ -298,10 +315,18 @@ CLASS ZCL_RAF_INBOUND_FUNC IMPLEMENTATION.
         lv_error_flag = 'X'.
         lv_message = me->set_message( server = server
             msg    = VALUE #( msgno = 007 )
-            reason = `call func error`
-        ).
+            reason = `call func error or dump`
+            code   = 500 " 500 DUMP
+        ) && lr_root->get_text( ).
 
         zcl_raf_ilog=>log( msgty = 'A' msgtx = lv_message ).
+        me->fdump = 'X'.
+
+        " 日志结束
+        zcl_raf_ilog=>end( ).
+        zcl_raf_ilog=>free( ).
+
+        RETURN.
     ENDTRY .
 
     " 构造返回参数对象.
@@ -359,7 +384,7 @@ CLASS ZCL_RAF_INBOUND_FUNC IMPLEMENTATION.
     MESSAGE ID 'ZRAF00' TYPE 'E' NUMBER msg-msgno
       WITH msg-msgv1 msg-msgv2 msg-msgv3 msg-msgv4 INTO ls_req-message.
 
-    server->response->set_status( code = 400 reason = reason ).
+    server->response->set_status( code = code reason = reason ).
     server->response->set_cdata( data = /ui2/cl_json=>serialize( data = ls_req
                                            pretty_name = /ui2/cl_json=>pretty_mode-camel_case ) ).
     server->response->set_content_type( `application/json` ).
