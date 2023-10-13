@@ -7,7 +7,7 @@ CLASS zcl_raf_inbound_func DEFINITION
 
     INTERFACES if_http_extension .
 
-    CLASS-DATA dguid TYPE ztraf_log-dguid READ-ONLY .
+    CLASS-DATA dguid TYPE ztraf_log-dguid .
     CLASS-DATA targt TYPE ztraf_log-targt READ-ONLY .
   PROTECTED SECTION.
   PRIVATE SECTION.
