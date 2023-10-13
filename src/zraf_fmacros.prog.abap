@@ -36,6 +36,8 @@ DEFINE /raf/init.
         /raf/lo_res_data TYPE REF TO data.
   FIELD-SYMBOLS: </raf/lt_re_tab> TYPE ANY TABLE.
   FIELD-SYMBOLS: </raf/ls_re_data> TYPE data.
+  FIELD-SYMBOLS: </raf/lo_func_data> TYPE data.
+  FIELD-SYMBOLS: </raf/lo_json_data> TYPE data.
 
   DATA: BEGIN OF /raf/ls_key,
           apino TYPE ztraf_log_data-apino,
@@ -136,13 +138,13 @@ DEFINE /raf/end.
     CREATE DATA /raf/lo_res_data LIKE LINE OF </raf/lt_re_tab>.
     ASSIGN /raf/lo_res_data->* TO </raf/ls_re_data>.
     " 传出参数存储
-    LOOP AT /raf/lt_parameter INTO DATA(/raf/ls_parametero) WHERE paramtype <> 'I'.
-      ASSIGN (/raf/ls_parametero-parameter) TO FIELD-SYMBOL(</raf/lo_func_datao>).
+    LOOP AT /raf/lt_parameter INTO /raf/ls_parameter WHERE paramtype <> 'I'.
+      ASSIGN (/raf/ls_parameter-parameter) TO </raf/lo_func_data>.
       IF sy-subrc = 0.
-        ASSIGN COMPONENT /raf/ls_parametero-parameter OF STRUCTURE </raf/ls_re_data>
-          TO FIELD-SYMBOL(</raf/lo_json_datao>).
+        ASSIGN COMPONENT /raf/ls_parameter-parameter OF STRUCTURE </raf/ls_re_data>
+          TO </raf/lo_json_data>.
         IF sy-subrc = 0.
-          </raf/lo_json_datao> = </raf/lo_func_datao>.
+          </raf/lo_json_data> = </raf/lo_func_data>.
         ENDIF.
       ENDIF.
     ENDLOOP.
