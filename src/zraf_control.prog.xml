@@ -36,6 +36,12 @@
     </item>
     <item>
      <ID>I</ID>
+     <KEY>105</KEY>
+     <ENTRY>接口配置视图</ENTRY>
+     <LENGTH>16</LENGTH>
+    </item>
+    <item>
+     <ID>I</ID>
      <KEY>301</KEY>
      <ENTRY>基于函数测试数据生成 JSON</ENTRY>
      <LENGTH>25</LENGTH>
