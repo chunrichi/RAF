@@ -17,6 +17,11 @@
        <REFERENCE>X</REFERENCE>
        <TYP>STRING</TYP>
       </RSIMP>
+      <RSIMP>
+       <PARAMETER>DATUM</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>DATUM</TYP>
+      </RSIMP>
      </IMPORT>
      <EXPORT>
       <RSEXP>
@@ -51,6 +56,11 @@
        <KIND>P</KIND>
       </RSFDO>
       <RSFDO>
+       <PARAMETER>DATUM</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>日期</STEXT>
+      </RSFDO>
+      <RSFDO>
        <PARAMETER>MESSAGE</PARAMETER>
        <KIND>P</KIND>
       </RSFDO>
@@ -62,7 +72,6 @@
       <RSFDO>
        <PARAMETER>DATE</PARAMETER>
        <KIND>P</KIND>
-       <STEXT>日期</STEXT>
       </RSFDO>
       <RSFDO>
        <PARAMETER>TIME</PARAMETER>

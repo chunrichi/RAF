@@ -3,6 +3,7 @@ FUNCTION zfm_raf00_in_demo.
 *"*"本地接口：
 *"  IMPORTING
 *"     REFERENCE(TEST) TYPE  STRING
+*"     REFERENCE(DATUM) TYPE  DATUM
 *"  EXPORTING
 *"     REFERENCE(MESSAGE) TYPE  STRING
 *"     REFERENCE(TIMESTAMP) TYPE  TIMESTAMP
@@ -10,6 +11,8 @@ FUNCTION zfm_raf00_in_demo.
 *"     REFERENCE(TIME) TYPE  UZEIT
 *"     REFERENCE(RESULT) TYPE  SFLIGHT
 *"----------------------------------------------------------------------
+  /raf/check `demo_in`.
+  /raf/init.
 
   " 字符串
   message = `入栈测试` && test.
@@ -27,4 +30,5 @@ FUNCTION zfm_raf00_in_demo.
                      msgtx = '入栈测试'
                      bskey = 'test:' && test ).
 
+  /raf/end.
 ENDFUNCTION.
