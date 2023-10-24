@@ -131,16 +131,33 @@ FORM frm_set_outbound_conf .
   ls_ztraf_main-changer = 'ZDEMO_RAF_INIT'.
   GET TIME STAMP FIELD ls_ztraf_main-ctimestamp.
 
+  " 获取 HOSTNAME + PORT
+  DATA: lv_hostname TYPE string,
+        lv_port     TYPE string.
+  CALL FUNCTION 'TH_GET_VIRT_HOST_DATA'
+    EXPORTING
+      " PROTOCOL             = 1 " 1 HTTP; 2 HTTPS
+      virt_idx       = 0
+    IMPORTING
+      hostname       = lv_hostname
+      port           = lv_port
+    EXCEPTIONS
+      not_found      = 1
+      internal_error = 2
+      OTHERS         = 3.
+
+
   ls_ztraf_conf-apino = gc_demo_out.
   ls_ztraf_conf-class_name = 'ZCL_RAF_OUTBOUND_FUNC'.
   ls_ztraf_conf-method     = 'POST'.
-  ls_ztraf_conf-url        = '?client=200&apino=' && gc_demo_in.     " 配置链接 变化的地方
+  ls_ztraf_conf-url        = '?client=' && sy-mandt && '&apino=' && gc_demo_in.     " 配置链接 变化的地方
   ls_ztraf_conf-changer    = 'ZDEMO_RAF_INIT'.
   GET TIME STAMP FIELD ls_ztraf_conf-ctimestamp.
 
   ls_ztraf_base-targt = 'DEMO'.
   ls_ztraf_base-sysid = sy-sysid.
-  ls_ztraf_base-url     = ''.                              " 配置基础链接 -> http://sapsicfcom:port/sap/zraf
+  ls_ztraf_base-url     = 'http://' && lv_hostname
+                       && ':' && lv_port && '/sap/bc/zraf'.  " 配置基础链接 -> http://sapsicfcom:port/sap/zraf
   ls_ztraf_base-changer = 'ZDEMO_RAF_INIT'.
   GET TIME STAMP FIELD ls_ztraf_base-ctimestamp.
 
