@@ -7,6 +7,7 @@ CLASS zcl_raf_inbound_func DEFINITION
 
     INTERFACES if_http_extension .
 
+    CLASS-DATA remotecall TYPE flag READ-ONLY .
     CLASS-DATA dguid TYPE ztraf_log-dguid .
     CLASS-DATA targt TYPE ztraf_log-targt READ-ONLY .
   PROTECTED SECTION.
@@ -307,6 +308,8 @@ CLASS ZCL_RAF_INBOUND_FUNC IMPLEMENTATION.
 
     " 调用函数实现各自的业务逻辑
     TRY .
+        remotecall = abap_true.
+
         CALL FUNCTION me->raf_iconf-func_name
           PARAMETER-TABLE lt_ptab
           EXCEPTION-TABLE lt_etab.
@@ -327,6 +330,8 @@ CLASS ZCL_RAF_INBOUND_FUNC IMPLEMENTATION.
         zcl_raf_ilog=>free( ).
 
         RETURN.
+      CLEANUP.
+        CLEAR: remotecall.
     ENDTRY .
 
     " 构造返回参数对象.
