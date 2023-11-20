@@ -7,13 +7,14 @@ CLASS zcl_raf_outbound_dirt DEFINITION
 
     INTERFACES zif_raf_outbound .
 
-    TYPES:
-      BEGIN OF ty_key_value,
-        key   TYPE string,
-        value TYPE string,
-      END OF ty_key_value .
-    TYPES:
-      tty_key_value TYPE TABLE OF ty_key_value .
+    ALIASES headers
+      FOR zif_raf_outbound~headers .
+    ALIASES params
+      FOR zif_raf_outbound~params .
+    ALIASES ty_key_value
+      FOR zif_raf_outbound~ty_key_value .
+    ALIASES tty_key_value
+      FOR zif_raf_outbound~tty_key_value .
 
     METHODS constructor
       IMPORTING
@@ -41,8 +42,6 @@ CLASS zcl_raf_outbound_dirt DEFINITION
     ALIASES result
       FOR zif_raf_outbound~result .
 
-    DATA headers TYPE tty_key_value .
-    DATA params TYPE tty_key_value .
     DATA url TYPE string .
 
     CLASS-METHODS readme .
@@ -184,9 +183,9 @@ CLASS ZCL_RAF_OUTBOUND_DIRT IMPLEMENTATION.
     lr_http_client->request->set_header_field( name = 'Content-Type' value = 'application/json' ).
 
     " 头部信息 设定传输请求内容格式以及编码格式
-    IF headers IS NOT INITIAL.
+    IF me->headers IS NOT INITIAL.
 
-      LOOP AT headers INTO DATA(ls_headers).
+      LOOP AT me->headers INTO DATA(ls_headers).
         lr_http_client->request->set_header_field( name = ls_headers-key value = ls_headers-value ).
       ENDLOOP.
 
@@ -262,7 +261,7 @@ CLASS ZCL_RAF_OUTBOUND_DIRT IMPLEMENTATION.
     ENDIF.
 
     lr_http_client->response->get_status( IMPORTING code = lv_status_code reason = lv_reason ).
-    IF lv_status_code <> 200.
+    IF lv_status_code < 200 OR lv_status_code >= 300.
       me->result = VALUE #( type = 'E' message = |{ lv_status_code } { lv_reason }| ).
     ENDIF.
 

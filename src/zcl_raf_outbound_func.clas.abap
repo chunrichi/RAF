@@ -6,6 +6,15 @@ CLASS zcl_raf_outbound_func DEFINITION
 
     INTERFACES zif_raf_outbound .
 
+    ALIASES headers
+      FOR zif_raf_outbound~headers .
+    ALIASES params
+      FOR zif_raf_outbound~params .
+    ALIASES ty_key_value
+      FOR zif_raf_outbound~ty_key_value .
+    ALIASES tty_key_value
+      FOR zif_raf_outbound~tty_key_value .
+
     CLASS-METHODS factory
       IMPORTING
         !apino         TYPE ztraf_maintain-apino
@@ -142,6 +151,14 @@ CLASS ZCL_RAF_OUTBOUND_FUNC IMPLEMENTATION.
     " 头部信息 设定传输请求内容格式以及编码格式
     lr_http_client->request->set_header_field( name = 'Content-Type' value = 'application/json' ).
 
+    IF me->headers IS NOT INITIAL.
+
+      LOOP AT me->headers INTO DATA(ls_headers).
+        lr_http_client->request->set_header_field( name = ls_headers-key value = ls_headers-value ).
+      ENDLOOP.
+
+    ENDIF.
+
     " 设置报文
     lr_http_client->request->set_cdata( data = lv_req_json ).
 
@@ -150,7 +167,7 @@ CLASS ZCL_RAF_OUTBOUND_FUNC IMPLEMENTATION.
     "lr_http_client->request->set_form_field( name = 'username' value = lv_username ).
     "lr_http_client->request->set_form_field( name = 'password' value = lv_password ).
 
-    " 认证方式
+    " 认证方式 >> 需要补充 or 继承重写
     CALL METHOD lr_http_client->authenticate
       EXPORTING
         username = 'admin'
